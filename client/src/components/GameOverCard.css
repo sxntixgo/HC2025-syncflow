@@ -1,0 +1,134 @@
+.game-over-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.game-over-card {
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.4s ease-out;
+  position: relative;
+  text-align: center;
+}
+
+.game-over-header {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.game-over-title {
+  color: var(--color-tertiary);
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.game-over-content {
+  margin-bottom: 25px;
+}
+
+.game-over-level {
+  margin-bottom: 20px;
+}
+
+.game-over-level-label {
+  background-color: var(--color-tertiary);
+  color: var(--color-secondary);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+}
+
+.game-over-info {
+  color: var(--color-quaternary);
+  line-height: 1.6;
+}
+
+.game-over-message {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 15px 0;
+}
+
+.game-over-description {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.game-over-footer {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-primary);
+}
+
+.game-over-continue-btn {
+  background-color: var(--color-tertiary);
+  color: var(--color-secondary);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: filter 0.2s;
+  font-size: 16px;
+}
+
+.game-over-continue-btn:hover {
+  filter: brightness(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .game-over-card {
+    margin: 20px;
+    width: calc(100% - 40px);
+    padding: 20px;
+  }
+  
+  .game-over-title {
+    font-size: 24px;
+  }
+  
+  .game-over-message {
+    font-size: 16px;
+  }
+  
+  .game-over-level-label {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

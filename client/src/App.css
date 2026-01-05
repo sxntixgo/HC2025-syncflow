@@ -1,0 +1,458 @@
+:root {
+    --color-primary: #f0f4f8;      /* Cool light background */
+    --color-secondary: #ffffff;    /* White containers */
+    --color-tertiary: #6366f1;    /* Purple accent - gaming feel */
+    --color-quaternary: #1e293b;  /* Dark text */
+    --color-quinary: #f59e0b;     /* Amber attention - gaming gold */
+}
+
+/* Dark Mode Colors */
+body.dark-mode {
+  --color-primary: #111827;     /* Dark blue-gray background */
+  --color-secondary: #1f2937;   /* Gray containers */
+  --color-tertiary: #a855f7;    /* Bright purple accent */
+  --color-quaternary: #f3f4f6;  /* Light gray text */
+  --color-quinary: #fbbf24;     /* Bright amber - gaming gold */
+
+  /* Adjust specific elements for dark mode if needed */
+}
+  
+  body {
+    background-color: var(--color-primary);
+    color: var(--color-quaternary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .app-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .lobby-container, .game-board, .end-screen {
+    background-color: var(--color-secondary);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  h1, h2, h3 {
+    color: var(--color-tertiary);
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--color-tertiary);
+    margin-right: 10px;
+    background-color: var(--color-primary);
+    color: var(--color-quaternary);
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--color-tertiary);
+    color: var(--color-secondary); /* Lighter text for better contrast in light mode */
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  
+  button:hover {
+    filter: brightness(1.1);
+  }
+  
+  button:disabled {
+    background-color: var(--color-primary); /* Use primary background for disabled */
+    color: var(--color-tertiary); /* Use accent for disabled text */
+    opacity: 1; /* Remove opacity to ensure solid colors */
+    cursor: not-allowed;
+  }
+  
+  .player-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .player-list li {
+    background-color: var(--color-primary);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ready-status {
+    color: var(--color-tertiary);
+  }
+  
+  .not-ready-status {
+    color: var(--color-quaternary);
+    opacity: 0.7;
+  }
+  
+  .game-info {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--color-primary);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .info-item {
+    font-size: 1.5em;
+  }
+  
+  .other-players {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .other-player {
+    background-color: var(--color-primary); /* Player boxes remain primary background */
+    padding: 15px;
+    border-radius: 8px;
+    min-width: 120px;
+    /* border removed for a cleaner look on a light theme */
+  }
+  
+  .played-pile {
+    display: none; /* Removed the last played card element */
+    min-height: 150px;
+    width: 110px;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: none; /* Removed dashed border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-weight: bold;
+    position: relative;
+  }
+
+  
+  .mistake-flash {
+    animation: flash-attention 0.5s;
+  }
+  
+  @keyframes flash-attention {
+    0% { background-color: var(--color-quinary); }
+    100% { background-color: var(--color-primary); }
+  }
+  
+  .player-hand {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-primary);
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .card {
+    background-color: var(--color-primary); /* Default: Cards stand out on container background (light green) */
+    color: var(--color-quaternary); /* Default: Text color on cards */
+    width: 80px;
+    height: 120px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow for light theme */
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  body.dark-mode .card {
+    background-color: var(--color-quaternary); /* Light grey card background in dark mode */
+    color: var(--color-primary); /* Dark text on light card background */
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Softer shadow on hover */
+  }
+
+  /* Played Cards History */
+  .played-cards-history {
+    margin: 20px auto;
+    padding: 15px;
+    background-color: var(--color-tertiary);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    /* Match width with game-info bar */
+    width: calc(100% - 40px);
+    max-width: 1000px;
+    height: 150px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* When no cards are played yet, show placeholder */
+  .played-cards-history.empty {
+    justify-content: center;
+  }
+
+  .play-area-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    user-select: none;
+  }
+
+  .play-area-placeholder span {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .play-area-placeholder small {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  .hidden-cards-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .hidden-cards-indicator span {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .hidden-cards-indicator small {
+    font-size: 10px;
+    opacity: 0.8;
+  }
+
+  .played-card-item {
+    background-color: var(--color-primary); /* Light mode: Lighter cards in history */
+    color: var(--color-quaternary);
+    width: 80px; /* Same size as hand cards */
+    height: 120px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: cardSlideIn 0.3s ease-out;
+    flex-shrink: 0; /* Prevent cards from shrinking */
+  }
+
+  .mistake-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 16px;
+    background-color: var(--color-quinary);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  @keyframes cardSlideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  body.dark-mode .played-card-item {
+    background-color: var(--color-quaternary); /* Light grey history card background in dark mode */
+    color: var(--color-primary); /* Dark text on light card background */
+  }
+
+  .lobby-notification {
+    background-color: var(--color-primary);
+    color: var(--color-quaternary);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+  /* Toast Notifications */
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .toast-notification {
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: var(--color-quaternary); /* Text color on toasts */
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out, fadeOut 0.5s ease-in 2.5s forwards;
+  }
+  
+  .toast-notification.success {
+    background-color: var(--color-tertiary); /* Dusty Blue */
+  }
+
+  .toast-notification.error {
+    background-color: var(--color-quinary); /* Vibrant Coral */
+  }
+  
+  .toast-notification.info {
+    background-color: #A4B0B8; /* Muted grey from disabled button */
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+    to { opacity: 0; transform: translateX(100%); }
+  }
+  
+  /* Card Back Graphics for Other Players */
+  .player-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+    max-width: 200px;
+  }
+
+  .card-back {
+    width: 40px;
+    height: 60px;
+    background-color: var(--color-primary);
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-tertiary);
+    overflow: hidden;
+  }
+
+  .card-back::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--color-tertiary) 0px,
+      var(--color-tertiary) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+    opacity: 0.3;
+    border-radius: 4px;
+  }
+
+  .card-back::after {
+    content: '?';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-tertiary);
+    font-size: 18px;
+    font-weight: bold;
+    opacity: 0.7;
+  }
+
+  /* Animation for card backs */
+  .card-back {
+    animation: cardFlicker 0.3s ease-in-out;
+  }
+
+  @keyframes cardFlicker {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .no-cards {
+    color: var(--color-quaternary);
+    opacity: 0.6;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 10px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Responsive card backs for mobile */
+  @media (max-width: 480px) {
+    .card-back {
+      width: 30px;
+      height: 45px;
+    }
+    
+    .card-back::after {
+      font-size: 14px;
+    }
+    
+    .player-cards {
+      gap: 5px;
+      max-width: 150px;
+    }
+    
+    .no-cards {
+      font-size: 10px;
+      min-height: 45px;
+    }
+  }

@@ -1,0 +1,19 @@
+{
+  "name": "syncflow-game",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "npm start --prefix server",
+    "start:client": "npm start --prefix client",
+    "install": "npm install --prefix server && npm install --prefix client",
+    "postinstall": "npm install --prefix server && npm install --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "overrides": {
+    "inflight": "1.0.6",
+    "glob": "7.2.3"
+  }
+}
